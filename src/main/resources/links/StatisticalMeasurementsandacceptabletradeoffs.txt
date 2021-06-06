@@ -1,0 +1,6 @@
+False positive rate (α) = type I error = 1 − specificity = FP / (FP + TN) = 180 / (180 + 1820) = 9%
+False negative rate (β) = type II error = 1 − sensitivity = FN / (TP + FN) = 10 / (20 + 10) = 33%
+True positive rate (TPR), Recall, Sensitivity, probability of detection = Σ True positive/Σ Condition positive
+Accuracy (ACC) = Σ True positive + Σ True negative/Σ Total population
+Precision = Σ True positive/Σ Predicted condition positive
+For more details, read under Confusion Matrix: https://en.wikipedia.org/wiki/Sensitivity_and_specificity
