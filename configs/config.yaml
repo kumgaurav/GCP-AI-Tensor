@@ -1,0 +1,7 @@
+project_name: "itd-aia-datalake"
+staging_location: "itd-aia-dp-dproc-staging"
+DATA_BUCKET: "itd-aia-sales-sfdc-meta"
+json_file_name: ""
+data_set: "janus_graph"
+symbols: " ABBV,  ACB,  AI,  AMD,  AMZN,  APPN,  APPS,  BDL,  BPTH,  BTX,  CGC,  CLNE,  CLOV,  COUR,  CROX,  CRWD,  CYRX,  DDD,  DE,  DKS,  DQ,  DRIP,  DXCM,  EBET,  ELP,  FB,  FSLY,  FTNT,  GME,  HOL,  IGT,  JKS,  JMIA,  JYNT,  LAD,  LB,  LEDS,  LFST,  LLY,  MARA,  MSFT,  MTP,  MTSI,  MUDS,  NIO,  NLST,  NOC,  NUE,  NVDA,  NVS,  OCGN,  OKTA,  PAYC,  PFE,  PLBY,  PLTR,  PTGX,  PYPL,  QTT,  RBLX,  RDFN,  REAL,  RHE,  RIOT,  SANA,  SNDL,  SNOW,  SOXL,  SPCE,  SRNE,  TSEM,  TSLA,  TTD,  TTM,  VEEV,  VER,  VIEW,  ZS, AAPL, ALB, ALT, AMC, ANVS, ARCT, ATOM, ATOM, BB, BBBY, BBW, BLU, CEI, CELH, CMRX, CNST, CXW, ESEA, FCEL, FIGS, FLYW, FUBO, FUV, GEVO, GLSI, KERN, KOSS, LB, MOXC, MVIS, NVT, OBSV, OCGN, OMI, OMIC, PAY, PETS, PLUG, QCOM, QFIN, QS, RESN, ROOT, SEER, SKLZ, SKY, SNDL, TEN, THCB, UONE, USCR"
+#symbols: "NVDA"
