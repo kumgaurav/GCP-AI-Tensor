@@ -1,0 +1,3 @@
+conda install numpy
+conda install pandas
+conda install -c conda-forge google-cloud-bigquery

@@ -13,7 +13,11 @@ from bq_utils import *
 from pyspark.conf import SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
+from pyspark.sql.window import Window
+from pyspark.sql.types import DoubleType
 from google.cloud import bigquery
+from collections import OrderedDict
+
 flags.DEFINE_string(
     'config', None,
     'Config file.')
@@ -33,8 +37,8 @@ def main(argv):
     utc_now = pytz.utc.localize(dt.datetime.utcnow())
     pst_date = utc_now.astimezone(timezone('US/Pacific'))
     # Input Start and End Date
-    start = pst_date - dt.timedelta(days=7)
-    end = pst_date #dt.datetime(2021,6,10)
+    start = pst_date - dt.timedelta(days=90)
+    end = pst_date - dt.timedelta(days=1)
     print("start -> "+str(start))
     print("end  -> "+str(end))
     start_date_str=start.strftime("%Y%m%d")
@@ -45,6 +49,7 @@ def main(argv):
     print("partition_date_str -> "+partition_date_str)
     Symbols=cfg_d["symbols"].split(",")
     Symbols.sort()
+    list(OrderedDict.fromkeys(Symbols))
     print("companies -> "+str(Symbols))
     conf = SparkConf()
     #conf.set("spark.sql.execution.arrow.enabled", "true")
@@ -69,7 +74,7 @@ def main(argv):
             if len(stock) == 0:
                 None
             else:
-                stock['Name']=i
+                stock['Name']=i.strip()
                 stock_final = stock_final.append(stock,sort=False)
         except Exception:
             None
@@ -95,10 +100,17 @@ def main(argv):
     sparkDF = sparkDF.dropDuplicates(['Date','Name']).filter(isnan(col("Open")) != True)
     sparkDF = sparkDF.withColumnRenamed("Adj Close", "AdjClose").withColumn("record_ingestion_date",to_date(lit(partition_date_str),DATE_FORMAT)).withColumn("Date",to_date(col("Date")))
     sparkDF.show(5)
-    sparkDF = sparkDF.withColumn("Open",bround(col("Open"),2)).withColumn("High",bround(col("High"),2)).withColumn("Low",bround(col("Low"),2)).withColumn("Close",bround(col("Close"),2)).withColumn("AdjClose",bround(col("AdjClose"),2)).withColumn("Volume",bround(col("Volume"),2))
+    sparkDF.printSchema()
+    sparkDF = sparkDF.withColumn("Open",bround(col("Open"),2)).withColumn("High",bround(col("High"),2)).withColumn("Low",bround(col("Low"),2)).withColumn("Close",bround(col("Close"),2)).withColumn("AdjClose",bround(col("AdjClose"),2)).withColumn("Volume",bround(col("Volume").cast(DoubleType()),2))
     sparkDF = sparkDF.select("Name","Date","Open","Close","Low","High","AdjClose","Volume","record_ingestion_date")
+    my_window = Window.partitionBy("Name").orderBy("Date")
+
+    sparkDF = sparkDF.withColumn("prev_close", lag(sparkDF.Close).over(my_window))
+    sparkDF = sparkDF.withColumn("change", when(isnull(sparkDF.Close - sparkDF.prev_close), 0).otherwise(round((sparkDF.Close - sparkDF.prev_close),2)))
+    sparkDF = sparkDF.withColumn("change_in_percent",round((sparkDF.change/sparkDF.prev_close)*100,2))
     #stock_final.Name.nunique()
     sparkDF.show(5)
+    sparkDF.printSchema()
     #sparkDF.repartition(1).write.mode('overwrite').format("csv").option("header","true").save("/Users/gkumargaur/tmp/sap")
     write_bq_data_with_partition(cfg_d,sparkDF,cfg_d['data_set'], "symbols_by_close", partition_date_str, write_mode="overwrite")
     
