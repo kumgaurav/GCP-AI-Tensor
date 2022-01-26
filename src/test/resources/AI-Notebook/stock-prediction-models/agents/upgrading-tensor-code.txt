@@ -1,0 +1,3 @@
+tf_upgrade_v2.py --infile foo.py --outfile bar.py
+  tf_upgrade_v2.py --infile foo.ipynb --outfile bar.ipynb
+  tf_upgrade_v2.py --intree ~/code/old --outtree ~/code/new

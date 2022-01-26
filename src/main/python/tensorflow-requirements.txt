@@ -1,0 +1,11 @@
+ conda create --name tensorflow python=3.8
+ pip install --upgrade tensorflow
+ pip install --upgrade jupyter
+ pip install --upgrade pandas
+ pip install --upgrade matplotlib
+ pip install --upgrade seaborn
+ pip install --upgrade sklearn
+ pip install --upgrade tqdm
+ pip install -U tensorflow-addons
+ 
+ 

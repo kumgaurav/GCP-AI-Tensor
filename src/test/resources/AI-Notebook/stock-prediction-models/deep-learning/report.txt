@@ -1,0 +1,42 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 1 files
+Detected 0 issues that require attention
+--------------------------------------------------------------------------------
+================================================================================
+Detailed log follows:
+
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'sentiment-consensus.ipynb'
+ outputting to 'sentiment-consensus.ipynb'
+--------------------------------------------------------------------------------
+
+62:10: INFO: Added keywords to args of function 'tf.pad'
+71:11: INFO: Renamed 'tf.layers.conv2d' to 'tf.compat.v1.layers.conv2d'
+80:10: INFO: Added keywords to args of function 'tf.pad'
+81:11: INFO: Renamed 'tf.layers.conv2d' to 'tf.compat.v1.layers.conv2d'
+90:18: INFO: Added keywords to args of function 'tf.shape'
+91:27: INFO: Added keywords to args of function 'tf.shape'
+111:17: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+112:17: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+114:27: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+125:16: INFO: Changing keep_prob arg of tf.nn.dropout to rate
+
+141:21: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+142:21: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+143:22: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+146:22: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+148:20: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+149:34: INFO: Added keywords to args of function 'tf.transpose'
+155:16: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+156:16: INFO: Changing keep_prob arg of tf.nn.dropout to rate
+
+160:22: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+161:20: INFO: Added keywords to args of function 'tf.reduce_mean'
+162:25: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+180:0: INFO: Renamed 'tf.reset_default_graph' to 'tf.compat.v1.reset_default_graph'
+185:7: INFO: Renamed 'tf.InteractiveSession' to 'tf.compat.v1.InteractiveSession'
+186:9: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+--------------------------------------------------------------------------------
+
